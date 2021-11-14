@@ -6,14 +6,14 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.item.product_name
+        return self.item.name
 
 class Order(models.Model):
     data_order_placed = models.DateField()
     order_item = models.ManyToManyField(OrderItem)
 
     def __str__(self):
-        return self.data_order_placed
+        return str(self.data_order_placed)
 
 class OrderStatus(models.Model):
 
@@ -23,4 +23,4 @@ class OrderStatus(models.Model):
     order = models.ManyToManyField(Order)
 
     def __str__(self):
-        return self.order_status
+        return str(self.order_status)
