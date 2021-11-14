@@ -9,29 +9,66 @@
       </div>
     <div class="row">
         {% for obj in queryset %}
-            <div class="col-md-12  mb-5">
+            <div class="col-md-12 mb-5">
                 <div class="card">
-                    <div class="card-body mt-2">
-                        <h5 class="card-title">Client : {{ obj.user.username }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ obj.user.username }}</h5>
                         <div class="row">
-                        {% for orderdetail in obj.order_detail.all %}
-                        
-                            <div class="col-md-4">
-                                <div class="card" style="width: 15rem;">
-                                    <img src="{{ orderitem.item.image_url }}" class="card-img-top" alt="...">
-                                 <div class="card-body">
-                                     <h5 class="card-title">{{ orderitem.item.name }}</h5>
-                                        <p class="card-text"></p>
-                                 <p class="card-text">quantity:{{ orderitem.order_item_quantity }}</p>
-                                </div>
+                            <div class="col-md-12 mb-2">
+                                {% for orderdetial in obj.order_detials.all %}
+                                <div class="card mb-3">
+                                    <div class="card-body ">
+                                        <h6>Status :</h6>
+                                        {% if orderdetial.order_status == 0 %}
+                                            <div class="progress">
+                                                <div class="progress-bar bg-danger " role="progressbar" style="width: 35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        {% elif orderdetial.order_status == 1 %}
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        {% else  %}
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="row">
+                                            {% for order in orderdetial.order.all %}
+                                                <div class="col-md-6 mt-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5>Ordered Date : {{ order.data_order_placed }}</h5>
+                                                            <table class="table">
+                                                                <thead>
+                                                                  <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Name</th>
+                                                                    <th scope="col">Price</th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% for orderitem in order.order_item.all %}
+                                                                        <tr>
+                                                                            <th scope="row">{{ orderitem.item.number }}</th>
+                                                                            <td>{{ orderitem.item.name }}</td>
+                                                                            <td>{{ orderitem.item.price }}</td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                              </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                  </div>
+                                {% endfor %}
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                    </div>
-                </div>
+                  </div>
             </div>
-
         {% endfor %}
     </div>
 
