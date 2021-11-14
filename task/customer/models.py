@@ -5,7 +5,7 @@ class Address(models.Model):
     '''
     The address is a street, city, state, zip, and country.
     '''
-    address         = models.CharField(max_length=255)
+    street         = models.CharField(max_length=255)
     city            = models.CharField(max_length=255)
     state           = models.CharField(max_length=255)
     zip_code        = models.CharField(max_length=255)
