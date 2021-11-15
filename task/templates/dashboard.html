@@ -12,7 +12,7 @@
             <div class="col-md-12 mb-5">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ obj.user.username }}</h5>
+                        <h5 class="card-title">Client : {{ obj.user.username }}</h5>
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 {% for orderdetial in obj.order_detials.all %}
@@ -20,14 +20,17 @@
                                     <div class="card-body ">
                                         <h6>Status :</h6>
                                         {% if orderdetial.order_status == 0 %}
+                                            <p><b>Packed</b></p>
                                             <div class="progress">
                                                 <div class="progress-bar bg-danger " role="progressbar" style="width: 35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         {% elif orderdetial.order_status == 1 %}
+                                            <p><b>Shipped</b></p>
                                             <div class="progress">
                                                 <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         {% else  %}
+                                            <p><b>Delivered</b></p>
                                             <div class="progress">
                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
